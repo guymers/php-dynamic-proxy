@@ -1,4 +1,10 @@
 {
+	"name": "guymers/php-dynamic-proxy",
+	"description": "A dynamic proxy generator for PHP",
+	"homepage": "http://github.com/guymers/php-dynamic-proxy",
+	"type": "library",
+	"license": "MIT",
+	
 	"require": {
 		"php": ">=5.4"
 	},

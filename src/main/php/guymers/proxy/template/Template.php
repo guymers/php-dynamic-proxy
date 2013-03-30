@@ -2,16 +2,28 @@
 
 namespace guymers\proxy\template;
 
+/**
+ * Basic templating
+ */
 class Template {
 
-	public static function render($template, $data) {
+	/**
+	 * Takes a string and replaces {key} with the value from the passed map.
+	 *
+	 * If the key does not exist in the map, no substitution is done.
+	 *
+	 * @param string $template
+	 * @param array $data
+	 * @return string
+	 */
+	public static function render($template, array $data) {
 		$callback = function($matches) use ($data) {
-			$key = $matches[1];
+			$key = $matches[2];
 
-			return $data[$key];
+			return isset($data[$key]) ? $data[$key] : $matches[1];
 		};
 
-		return preg_replace_callback("#\{(\w+)\}#", $callback, $template);
+		return preg_replace_callback("#(\{(\w+)\})#", $callback, $template);
 	}
 
 }
