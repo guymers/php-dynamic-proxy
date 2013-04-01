@@ -1,16 +1,20 @@
 <?php
 
-namespace guymers\proxy;
+namespace guymers\proxy\internal;
 
 use \Exception;
 use \ReflectionClass;
 use \ReflectionMethod;
 use \ReflectionParameter;
 
+use guymers\proxy\Config;
+use guymers\proxy\MethodAndHook;
+use guymers\proxy\exception\AlreadyProxyException;
+use guymers\proxy\exception\HookAlreadyDefinedException;
 use guymers\proxy\template\ClassTemplate;
 use guymers\proxy\template\MethodTemplate;
 
-class ProxyFactoryInternal {
+class ProxyFactory {
 
 	/**
 	 * @var ReflectionClass
@@ -40,7 +44,12 @@ class ProxyFactoryInternal {
 		$uniqueIdentifier = $className . "_" . $modificationTime;
 
 		foreach ($this->methodHooks as $methodHook) {
-			$uniqueIdentifier .= "_" . spl_object_hash($methodHook);
+			$class = new ReflectionClass($methodHook);
+			$className = $class->getName();
+			$fFileName = $class->getFileName();
+			$modificationTime = filemtime($fFileName);
+
+			$uniqueIdentifier .= "_" . $className . "_" . $modificationTime;
 		}
 
 		$uniqueIdentifier = md5($uniqueIdentifier);
@@ -53,7 +62,7 @@ class ProxyFactoryInternal {
 
 	public function create() {
 		if ($this->class->implementsInterface(Config::$PROXY_IMPLEMENTATION)) {
-			throw new Exception("already a proxy");
+			throw new AlreadyProxyException();
 		}
 
 		$fileName = $this->getProxyClassFileName();
@@ -105,15 +114,15 @@ class ProxyFactoryInternal {
 
 		foreach ($methods as $method) {
 			$methodName = $method->getName();
-
 			$methodHooksForMethod = $this->getMethodHooksForMethod($method);
 
 			if (count($methodHooksForMethod) > 1) {
-				throw new Exception("more than one hook for method $methodName");
+				throw new HookAlreadyDefinedException("more than one hook for method $methodName");
 			}
 
 			if (isset($methodHooksForMethod[0])) {
-				$methodHooksByName[$methodName] = $methodHooksForMethod[0];
+				$hook = $methodHooksForMethod[0];
+				$methodHooksByName[$methodName] = new MethodAndHook($method, $hook);
 			}
 		}
 

@@ -14,10 +14,10 @@ class ClassTemplate {
 
 		final class {proxyClassName} extends {className} implements \{proxyInterface} {
 
-			private $methodHooks = [];
+			private $_methodHooks = [];
 
 			public function _setMethodHooks(array $methodHooks) {
-				$this->methodHooks = $methodHooks;
+				$this->_methodHooks = $methodHooks;
 			}
 
 			{methods}
@@ -55,14 +55,14 @@ class ClassTemplate {
 	}
 
 	private function getNamespaceString() {
-		$namespaceString = "";
+		$string = "";
 		$namespace = $this->class->getNamespaceName();
 
 		if ($namespace) {
-			$namespaceString = "namespace $namespace;";
+			$string = "namespace $namespace;";
 		}
 
-		return $namespaceString;
+		return $string;
 	}
 
 }

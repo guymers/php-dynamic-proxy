@@ -4,6 +4,8 @@ namespace guymers\proxy;
 
 use \ReflectionClass;
 
+use guymers\proxy\internal\ProxyFactory as ProxyFactoryInternal;
+
 class ProxyFactory {
 
 	private static $INITIALISED = false;

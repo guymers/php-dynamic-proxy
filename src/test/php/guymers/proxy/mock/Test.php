@@ -23,8 +23,10 @@ class Test {
 		return "$param1 - $param2 = $param3";
 	}
 
-	public function testingTypeHintParams(Test $param1, Test $param2 = null) {
+	public function testingTypeHintParams(Test &$param1, Test $param2 = null) {
 		return "testingTypeHintParams " . $param1->testingParams("1", "2");
 	}
+
+	public function testingTypeHintParamsClassNotLoaded(\guymers\proxy\blah\TestNotLoaded $param) {}
 
 }

@@ -20,10 +20,10 @@ interface MethodHook {
 	/**
 	 * Called instead of the original method
 	 *
-	 * @param mixed $proxy the proxy object
-	 * @param callable $method original method wrapped in a closure
+	 * @param mixed $proxy the proxied object
+	 * @param ReflectionMethod $method original method
 	 * @param array $args original methods arguments
 	 */
-	public function invoke($proxy, callable $method, array $args);
+	public function invoke($proxy, ReflectionMethod $method, array $args);
 
 }
