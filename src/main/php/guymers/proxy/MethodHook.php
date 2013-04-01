@@ -20,7 +20,7 @@ interface MethodHook {
 	/**
 	 * Called instead of the original method
 	 *
-	 * @param mixed $proxy the proxied object
+	 * @param mixed $proxy the proxy object
 	 * @param ReflectionMethod $method original method
 	 * @param array $args original methods arguments
 	 */

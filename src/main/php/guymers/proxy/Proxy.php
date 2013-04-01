@@ -2,8 +2,6 @@
 
 namespace guymers\proxy;
 
-use \ReflectionClass;
-
 /**
  * Interface dynamic proxies will implement
  */
