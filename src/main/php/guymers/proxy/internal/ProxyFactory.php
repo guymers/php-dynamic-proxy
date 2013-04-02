@@ -107,7 +107,7 @@ class ProxyFactory {
 		$directory = Config::$CACHE_DIRECTORY . DIRECTORY_SEPARATOR . $namespace;
 
 		if (!is_dir($directory)) {
-			mkdir($directory, 0755, true);
+			mkdir($directory, Config::$CACHE_DIRECTORY_PERMISSIONS, true);
 		}
 
 		return $directory;
