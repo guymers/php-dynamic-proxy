@@ -75,6 +75,7 @@ class ProxyFactory {
 			$classString = $classTemplate->render($this->proxyClassShortName, $methodNames);
 
 			file_put_contents($fileName, "<?php\n" . $classString);
+			chmod($fileName, Config::$CACHE_FILE_PERMISSIONS);
 		}
 
 		$namespace = $this->class->getNamespaceName();
