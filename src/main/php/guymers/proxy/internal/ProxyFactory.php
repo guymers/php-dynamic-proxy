@@ -108,7 +108,9 @@ class ProxyFactory {
 		$directory = Config::$CACHE_DIRECTORY . DIRECTORY_SEPARATOR . $namespace;
 
 		if (!is_dir($directory)) {
+			$old = umask(0);
 			mkdir($directory, Config::$CACHE_DIRECTORY_PERMISSIONS, true);
+			umask($old);
 		}
 
 		return $directory;
