@@ -64,8 +64,20 @@ class ProxyTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("one - two = ", $this->proxy->testingParams("one", "two"));
 		$this->assertEquals("TestingParams", $this->proxy->getVariable());
 
-		$this->assertEquals("testingTypeHintParams 1 - 2 = ", $this->proxy->testingTypeHintParams(new Test()));
+		$this->assertEquals("testingTypeHintParams 1 - 2 = ", $this->proxy->testingTypeHintParams(new Test("")));
 		$this->assertEquals("TestingTypeHintParams", $this->proxy->getVariable());
+	}
+
+	/**
+	 * @test
+	 */
+	public function proxyArgs() {
+		$arg = "blah";
+		$args = [$arg];
+		$proxy = ProxyFactory::create($this->class, [], $args);
+
+		$this->assertTrue($proxy instanceof Test);
+		$this->assertEquals($arg, $proxy->getConstructorVariable());
 	}
 
 	/**

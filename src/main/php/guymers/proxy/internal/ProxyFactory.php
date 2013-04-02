@@ -60,7 +60,7 @@ class ProxyFactory {
 		return $proxyClassName;
 	}
 
-	public function create() {
+	public function create(array $args = null) {
 		if ($this->class->implementsInterface(Config::$PROXY_IMPLEMENTATION)) {
 			throw new AlreadyProxyException();
 		}
@@ -80,8 +80,14 @@ class ProxyFactory {
 		$namespace = $this->class->getNamespaceName();
 		$namespace = $namespace ? "\\$namespace\\" : "";
 		$proxyClassName = $namespace . $this->proxyClassShortName;
+		$proxyClass = new ReflectionClass($proxyClassName);
 
-		$proxy = new $proxyClassName();
+		if (is_null($args)) {
+			$proxy = $proxyClass->newInstanceWithoutConstructor();
+		} else {
+			$proxy = $proxyClass->newInstanceArgs($args);
+		}
+
 		$proxy->_setMethodHooks($methodHooksByName);
 
 		return $proxy;

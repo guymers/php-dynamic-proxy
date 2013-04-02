@@ -14,7 +14,7 @@ class ParameterTest extends PHPUnit_Framework_TestCase {
 	private $parameterClassNotLoaded;
 
 	public function setUp() {
-		$test = new Test();
+		$test = new Test("");
 		$class = new ReflectionClass($test);
 		$method = $class->getMethod("testingTypeHintParams");
 		$parameters = $method->getParameters();

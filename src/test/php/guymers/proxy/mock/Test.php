@@ -4,7 +4,16 @@ namespace guymers\proxy\mock;
 
 class Test {
 
+	private $constructorVariable = "";
 	private $variable = "";
+
+	public function __construct($constructorVariable) {
+		$this->constructorVariable = $constructorVariable;
+	}
+
+	public function getConstructorVariable() {
+		return $this->constructorVariable;
+	}
 
 	public function getVariable() {
 		return $this->variable;

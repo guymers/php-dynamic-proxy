@@ -25,12 +25,17 @@ class ProxyFactory {
 	}
 
 	/**
-	 * Create a proxy for a class with the method hooks
+	 * Create a proxy for a class with the provided method hooks.
+	 *
+	 * If an argument array is provided the proxy's constructor is called with
+	 * it, otherwise the constructor is not called.
 	 *
 	 * @param ReflectionClass $class
-	 * @param array $methodHooks
+	 * @param MethodHook[] $methodHooks
+	 * @param array $args
+	 * @return mixed a proxy object for class
 	 */
-	public static function create(ReflectionClass $class, array $methodHooks) {
+	public static function create(ReflectionClass $class, array $methodHooks, array $args = null) {
 		if (!self::$INITIALISED) {
 			self::initialise();
 			self::$INITIALISED = true;
@@ -38,7 +43,7 @@ class ProxyFactory {
 
 		$proxyFactory = new ProxyFactoryInternal($class, $methodHooks);
 
-		return $proxyFactory->create();
+		return $proxyFactory->create($args);
 	}
 
 }
