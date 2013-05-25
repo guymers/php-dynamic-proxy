@@ -10,7 +10,7 @@ class Config {
 	public static $CACHE_DIRECTORY_PERMISSIONS = 0755;
 	public static $CACHE_FILE_PERMISSIONS = 0644;
 
-	public static function set(array $config = []) {
+	public static function set(array $config) {
 		foreach ($config as $key => $value) {
 			self::${$key} = $value;
 		}

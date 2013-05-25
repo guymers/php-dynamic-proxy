@@ -13,15 +13,16 @@ class ProxyFactory {
 	private static function initialise() {
 		$cacheDir = Config::$CACHE_DIRECTORY;
 		$fileExtension = Config::$FILE_EXTENSION;
-
-		spl_autoload_register(function($class) use ($cacheDir, $fileExtension) {
+		$autoload = function($class) use ($cacheDir, $fileExtension) {
 			$classPath = str_replace("\\", DIRECTORY_SEPARATOR, $class);
 			$fileName = $cacheDir . DIRECTORY_SEPARATOR . $classPath . "." . $fileExtension;
 
 			if (file_exists($fileName)) {
 				include($fileName);
 			}
-		});
+		};
+
+		spl_autoload_register($autoload);
 	}
 
 	/**
