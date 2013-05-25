@@ -3,6 +3,7 @@ vendor/*
 coverage
 docs
 
+.sonar
 .buildpath
 .settings
 .project
