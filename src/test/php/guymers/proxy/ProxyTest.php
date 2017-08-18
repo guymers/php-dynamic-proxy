@@ -10,6 +10,7 @@ use \RecursiveDirectoryIterator;
 use \RecursiveIteratorIterator;
 
 use guymers\proxy\mock\Test;
+use guymers\proxy\mock\TestNullable;
 
 class ProxyTest extends PHPUnit_Framework_TestCase {
 
@@ -104,6 +105,14 @@ class ProxyTest extends PHPUnit_Framework_TestCase {
 		ProxyFactory::create($this->class, $methodHooks);
 	}
 
+	/**
+	 * @test
+	 * @requires PHP 7.1
+	 */
+	public function proxyNullable(){
+		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'),[]);
+		$this->assertTrue($proxy instanceof TestNullable);
+	}
 }
 
 class TestingParams implements MethodHook {

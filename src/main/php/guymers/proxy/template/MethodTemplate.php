@@ -45,7 +45,10 @@ class MethodTemplate {
 		$data = [
 			"method" => $this->method->getName(),
 			"parameters" => join(", ", $parameters),
-			"parameterDefinitions" => join(", ", $parameterDefinitions)
+			"parameterDefinitions" => join(", ", $parameterDefinitions),
+            "returnType" => (version_compare(PHP_VERSION, '7.0.0', '>=') > 0)
+                ? ": \\".$this->method->getReturnType()
+                : ""
 		];
 
 		return Template::render(self::$TEMPLATE, $data);
