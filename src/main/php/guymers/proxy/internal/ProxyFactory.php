@@ -2,17 +2,15 @@
 
 namespace guymers\proxy\internal;
 
-use \Exception;
 use \ReflectionClass;
 use \ReflectionMethod;
-use \ReflectionParameter;
 
 use guymers\proxy\Config;
 use guymers\proxy\MethodAndHook;
+use guymers\proxy\MethodHook;
 use guymers\proxy\exception\AlreadyProxyException;
 use guymers\proxy\exception\HookAlreadyDefinedException;
 use guymers\proxy\template\ClassTemplate;
-use guymers\proxy\template\MethodTemplate;
 
 class ProxyFactory {
 

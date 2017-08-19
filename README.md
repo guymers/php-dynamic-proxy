@@ -14,14 +14,14 @@ $methodOverrides = [
 		public function supports(ReflectionMethod $method) {
 			return $method->getName() == "test";
 		}
-	
+
 		public function invoke($proxy, ReflectionMethod $method, array $args) {
 			// before original method
-	
+
 			$returnValue = $method->invokeArgs($proxy, $args);
-			
+
 			// after original method
-			
+
 			return $returnValue;
 		}
 	}

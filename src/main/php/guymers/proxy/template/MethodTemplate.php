@@ -2,9 +2,7 @@
 
 namespace guymers\proxy\template;
 
-use \Exception;
 use \ReflectionMethod;
-use \ReflectionParameter;
 
 use guymers\proxy\internal\Parameter;
 

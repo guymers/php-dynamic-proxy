@@ -3,11 +3,13 @@
 	<description>A custom coding standard.</description>
 
 	<exclude-pattern>/vendor/*</exclude-pattern>
+	<exclude-pattern>/src/test/resources/*</exclude-pattern>
 
 	<rule ref="PSR2">
 		<exclude name="Generic.WhiteSpace.ScopeIndent"/>
 		<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
 
+		<exclude name="PSR1.Classes.ClassDeclaration"/>
 		<exclude name="PSR2.Classes.ClassDeclaration"/>
 
 		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration"/>
@@ -21,9 +23,6 @@
 
 	<rule ref="Generic.Classes.DuplicateClassName"/>
 
-	<rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
-	<rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
-	
 	<!-- only || and && -->
 	<rule ref="Squiz.Operators.ValidLogicalOperators"/>
 
@@ -35,5 +34,5 @@
 	<rule ref="Squiz.WhiteSpace.ScopeKeywordSpacing"/>
 	<rule ref="Squiz.WhiteSpace.SemicolonSpacing"/>
 	<rule ref="Squiz.WhiteSpace.SuperfluousWhitespace"/>
-	
+
 </ruleset>

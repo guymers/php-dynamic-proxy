@@ -3,7 +3,6 @@
 namespace guymers\proxy\template;
 
 use \ReflectionClass;
-use \ReflectionMethod;
 
 use guymers\proxy\Config;
 
