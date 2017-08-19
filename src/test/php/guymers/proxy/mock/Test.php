@@ -57,5 +57,4 @@ class TestNullable {
 			return "testingNullableTypeHintParams " . $param1->testingParams("1", "2");
 		}
 	
-	}
-	
+}

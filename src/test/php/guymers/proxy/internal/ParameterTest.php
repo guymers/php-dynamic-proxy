@@ -65,6 +65,6 @@ class ParameterTest extends PHPUnit_Framework_TestCase {
 		$parameter = $parameters[1];
 		$parameterClassAndDefault = new Parameter($parameter);
 		$this->assertEquals('?\guymers\proxy\mock\Test $param1Nullable', $parameterClassAndReference->asFullString());
-		$this->assertEquals('\guymers\proxy\mock\Test $param2Nullable = NULL', $parameterClassAndDefault->asFullString()); // as for php 7.1 defaul null and nullable type is same so proxy can extend target class 
-	}
+		$this->assertEquals('\guymers\proxy\mock\Test $param2Nullable = NULL', $parameterClassAndDefault->asFullString()); // as for php 7.1 defaul null and nullable type is same so proxy can extend target class
+	 }
 }

@@ -109,8 +109,8 @@ class ProxyTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 * @requires PHP 7.1
 	 */
-	public function proxyNullable(){
-		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'),[]);
+	public function proxyNullable() {
+		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'), []);
 		$this->assertTrue($proxy instanceof TestNullable);
 	}
 }

@@ -41,9 +41,7 @@ class Parameter {
 			$string = "&" . $string;
 		}
 
-		$type = version_compare(PHP_VERSION, '7.1.0') >= 0
-			? $this->getParameterType()
-			: $this->getTypeHint();
+		$type = version_compare(PHP_VERSION, '7.1.0') >= 0 ? $this->getParameterType() : $this->getTypeHint();
 
 		if ($type) {
 			$string = $type . " " . $string;
@@ -63,18 +61,18 @@ class Parameter {
 	 *
 	 * @return string
 	 */
-	private function getParameterType(){
+	private function getParameterType() {
 	
 		if ($this->parameter->isArray()) {
 			return "array";
 		}
 		$type = $this->parameter->hasType() ? $this->parameter->getType()->__toString() : '';
 
-		if($type){
+		if ($type) {
 			$type = '\\' . $type;
 		}
 
-		if($this->parameter->hasType() && $this->parameter->getType()->allowsNull() && !$this->parameter->isDefaultValueAvailable()){
+		if ($this->parameter->hasType() && $this->parameter->getType()->allowsNull() && !$this->parameter->isDefaultValueAvailable()) {
 			$type = '?' . $type;
 		}
 
