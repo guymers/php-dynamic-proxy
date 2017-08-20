@@ -17,7 +17,7 @@
 
 	"autoload": {
 		"psr-0": {
-			"guymers": "src/main/php"
+			"guymers": ["src/main/php","src/test/php"]
 		}
 	}
 }

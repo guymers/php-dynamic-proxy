@@ -112,7 +112,33 @@ class ProxyTest extends PHPUnit_Framework_TestCase {
 	public function proxyNullable() {
 		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'), []);
 		$this->assertTrue($proxy instanceof TestNullable);
+		$this->assertTrue($proxy->testingNullableTypeHintParams(new Test("")) instanceof Test);
 	}
+
+	/**
+	 * @test
+	 * @requires PHP 7.1
+	 */
+	 public function proxyNullableMocked() {
+		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'), [
+			new TestingNullableTypeHintParams()
+		]);
+		$this->assertTrue($proxy instanceof TestNullable);
+		$this->assertNull($proxy->testingNullableTypeHintParams(new Test("")));
+	 }
+}
+
+class TestingNullableTypeHintParams implements MethodHook {
+	
+		public function supports(ReflectionMethod $method) {
+			return $method->getName() == "testingNullableTypeHintParams";
+		}
+	
+		public function invoke($proxy, ReflectionMethod $method, array $args) {
+	
+			return null;
+		}
+	
 }
 
 class TestingParams implements MethodHook {
