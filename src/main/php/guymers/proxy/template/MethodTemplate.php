@@ -12,7 +12,7 @@ use guymers\proxy\internal\Parameter;
 class MethodTemplate {
 
 	private static $TEMPLATE = '
-		public function {method}({parameterDefinitions}) {
+		public function {method}({parameterDefinitions}) {returnType}{
 			$methodAndHook = $this->_methodHooks["{method}"];
 			$method = $methodAndHook->getMethod();
 			$hook = $methodAndHook->getHook();
@@ -42,10 +42,22 @@ class MethodTemplate {
 			$parameterDefinitions[] = $internalParameter->asFullString();
 		}
 
+		$type = "";
+
+		if (version_compare(PHP_VERSION, '7.0.0', '>=') > 0 && $this->method->hasReturnType()) {
+			$returnType = $this->method->getReturnType();
+			$type = "\\".$returnType->getName();
+			if (version_compare(PHP_VERSION, '7.1.0', '>=') > 0 && $returnType->allowsNull()) {
+				$type = "?".$type;
+			}
+			$type = ": ".$type;
+		}
+
 		$data = [
 			"method" => $this->method->getName(),
 			"parameters" => join(", ", $parameters),
-			"parameterDefinitions" => join(", ", $parameterDefinitions)
+			"parameterDefinitions" => join(", ", $parameterDefinitions),
+			"returnType" => $type
 		];
 
 		return Template::render(self::$TEMPLATE, $data);

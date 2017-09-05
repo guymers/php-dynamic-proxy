@@ -10,6 +10,7 @@ use \RecursiveDirectoryIterator;
 use \RecursiveIteratorIterator;
 
 use guymers\proxy\mock\Test;
+use guymers\proxy\mock\TestNullable;
 
 class ProxyTest extends PHPUnit_Framework_TestCase {
 
@@ -104,6 +105,40 @@ class ProxyTest extends PHPUnit_Framework_TestCase {
 		ProxyFactory::create($this->class, $methodHooks);
 	}
 
+	/**
+	 * @test
+	 * @requires PHP 7.1
+	 */
+	public function proxyNullable() {
+		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'), []);
+		$this->assertTrue($proxy instanceof TestNullable);
+		$this->assertTrue($proxy->testingNullableTypeHintParams(new Test("")) instanceof Test);
+	}
+
+	/**
+	 * @test
+	 * @requires PHP 7.1
+	 */
+	 public function proxyNullableMocked() {
+		$proxy = ProxyFactory::create(new ReflectionClass('guymers\proxy\mock\TestNullable'), [
+			new TestingNullableTypeHintParams()
+		]);
+		$this->assertTrue($proxy instanceof TestNullable);
+		$this->assertNull($proxy->testingNullableTypeHintParams(new Test("")));
+	 }
+}
+
+class TestingNullableTypeHintParams implements MethodHook {
+	
+		public function supports(ReflectionMethod $method) {
+			return $method->getName() == "testingNullableTypeHintParams";
+		}
+	
+		public function invoke($proxy, ReflectionMethod $method, array $args) {
+	
+			return null;
+		}
+	
 }
 
 class TestingParams implements MethodHook {

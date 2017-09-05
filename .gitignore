@@ -3,6 +3,7 @@ composer.lock
 /coverage/
 /docs/
 
+.vscode
 .sonar
 .buildpath
 .settings
